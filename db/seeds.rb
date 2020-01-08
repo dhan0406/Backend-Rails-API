@@ -11,7 +11,11 @@ neighborhood = ["Capitol Hill", "Downtown", "International District", "SLU", "Ra
 10.times do
   Coffeeshop.create(
     name: Faker::Coffee.unique.blend_name,
+    address: Faker::Address.street_address,
     neighborhood: neighborhood.sample,
-
+    parking: ["lot", "street"].sample,
+    wifi: [true, false].sample,
+    food: [true, false].sample,
+    alcohol: [true, false].sample,
   )
 end
