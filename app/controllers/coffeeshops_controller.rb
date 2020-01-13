@@ -4,14 +4,27 @@ class CoffeeshopsController < ApplicationController
     render :json => coffeeshops.as_json(only: [:name, :address, :neighborhood, :parking, :wifi, :food, :alcohol], status: :ok)
   end
 
-#   def search
-# #     user = User.where(...).to_a.clone.map!{ ... } or
-# # user = User.where(...).to_a; user.map!{ ... }
+  # in rails console:
+  # Coffeeshop.where(neighborhood: "Magnolia", wifi: true)
+  def match
+    @query = {}
+    @query[:neighborhood] = params[:neighborhood]
+    @query[:parking] = params[:parking]
+    @query[:wifi] = params[:wifi]
+    @query[:food] = params[:food]
+    @query[:alcohol] = params[:alcohol]
 
-#     # will return json as a result of search query from React Native
-#     # search query: neighborhood, parking, wifi, food, alcohol
+    @coffeeshop = Coffeeshop.where(@query)
 
-#     matched_results = Coffeeshop.where(:neighborhood = params[:query][:neighborhood])
-#   end
+    render(
+      status: :ok,
+      json: @coffeeshop.as_json(
+        only: [:name, :address, :neighborhood] )
+    )
+  end
+
+  def coffeeshop_params
+    params.require(:coffeeshop).permit(:name, :address, :neighborhood, :parking, :wifi, :food, :alcohol )
+  end
 end
 
