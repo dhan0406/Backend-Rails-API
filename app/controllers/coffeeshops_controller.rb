@@ -6,20 +6,23 @@ class CoffeeshopsController < ApplicationController
 
   # in rails console:
   # Coffeeshop.where(neighborhood: "Magnolia", wifi: true)
+
+  #URL: localhost:3000/match?neighborhood=Magnolia&parking=lot&wifi=true&food=false&alcohol=false
   def match
-    @query = {}
-    @query[:neighborhood] = params[:neighborhood]
-    @query[:parking] = params[:parking]
-    @query[:wifi] = params[:wifi]
-    @query[:food] = params[:food]
-    @query[:alcohol] = params[:alcohol]
+    @query = {
+      :neighborhood => params[:neighborhood],
+      :parking => params[:parking],
+      :wifi => params[:wifi],
+      :food => params[:food],
+      :alcohol => params[:alcohol]
+    }
 
     @coffeeshop = Coffeeshop.where(@query)
 
     render(
       status: :ok,
       json: @coffeeshop.as_json(
-        only: [:name, :address, :neighborhood] )
+        only: [:img, :name, :address, :neighborhood] )
     )
   end
 
