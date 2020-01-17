@@ -1,0 +1,12 @@
+FROM postgres:12
+
+COPY ./ /rails-api
+RUN apt-get update
+
+RUN apt-get install ruby-full ruby-rails -y 
+RUN gem install bundler
+RUN gem install thread_safe -v '0.3.6'
+RUN cd rails-api && bundle install --force
+
+RUN cd rails-api && rails db:seed
+RUN rm -rf rails-api 

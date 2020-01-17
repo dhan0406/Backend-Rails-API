@@ -83,3 +83,4 @@ production:
   database: backendapi_production
   username: backendapi
   password: <%= ENV['BACKENDAPI_DATABASE_PASSWORD'] %>
+

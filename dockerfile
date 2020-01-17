@@ -3,6 +3,8 @@ FROM ruby:2.5.5
 COPY ./ /rails-api
 WORKDIR /rails-api
 
+RUN apt-get update && apt-get install postgresql-client -y
+
 RUN gem install bundler rails
 RUN bundle install
 

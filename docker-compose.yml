@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  api:
+    image: dhan0406/capstone-backend
+    ports:
+    - "80:3000"
+    links:
+      - db
+    volumes:
+      - /home/ec2-user/database.yml:/rails-api/config/database.yml
+  db:
+    image: postgres:11.5
+    environment:
+      - POSTGRES_PASSWORD=jellyfish
+      - POSTGRES_USER=backendapi
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
