@@ -1,5 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  # This is the line that was recommended to make it work on Heroku
+  config.hosts << "ec2-52-25-68-111.us-west-2.compute.amazonaws.com"
+
 
   # Code is not reloaded between requests.
   config.cache_classes = true

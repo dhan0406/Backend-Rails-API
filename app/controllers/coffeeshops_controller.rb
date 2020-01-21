@@ -14,7 +14,6 @@ class CoffeeshopsController < ApplicationController
       :parking => params[:parking],
       :wifi => params[:wifi],
       :food => params[:food],
-      :alcohol => params[:alcohol]
     }
 
     @coffeeshop = Coffeeshop.where(@query)
